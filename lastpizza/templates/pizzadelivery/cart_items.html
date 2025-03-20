@@ -1,0 +1,49 @@
+{% load static %}
+<div id="cart-content">
+    {% if cart.items.all %}
+        {% for item in cart.items.all %}
+        <div class="cart-item">
+            <!-- Item Row (Image + Name + Remove Button) -->
+            <div class="cart-item-header">
+                <img src="{{ item.pizza.image.url }}" alt="{{ item.pizza.name }}">
+                <span class="cart-item-name">{{ item.pizza.name }}</span>
+                <button type="button" class="delete-cart-item" data-id="{{ item.pizza.id }}">Remove</button>
+            </div>
+
+            <!-- Separator -->
+            <hr>
+
+            <!-- Price & Quantity Section -->
+            <div class="cart-item-bottom">
+                <!-- Price (Left Side) -->
+                <div class="cart-item-price">Price: ${{ item.total_price }}</div>
+
+                <!-- Quantity Controls (Right Side) -->
+                <div class="cart-item-quantity">
+                    <button type="button" class="decrement-btn" data-id="{{ item.pizza.id }}">-</button>
+                    <span class="cart-quantity">{{ item.quantity }}</span>
+                    <button type="button" class="increment-btn" data-id="{{ item.pizza.id }}">+</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Cart Summary -->
+        <div class="cart-footer">
+            <p><b>Total Price: $<span id="cart-total-price">{{ cart.total_price }}</span></b></p>
+            <p><b>Total Items: <span id="cart-items-count">{{ cart.items.count }}</span></b></p>
+            <a href="{% url 'checkout' %}"><button>Checkout</button></a>
+        </div>
+    {% else %}
+    <div class="emt-cart">
+       <img src="{% static 'images/emptycart.svg' %}" alt="emptycart">
+       <h3>Oops, Your cart is empty!</h2>
+        <p>Looks like you haven't added anything to your cart yet.</p>
+    </div>
+    {% endif %}
+    <script>
+        const emptyCartImageURL = "{% static 'images/emptycart.svg' %}";
+        
+    </script>
+    
+</div>

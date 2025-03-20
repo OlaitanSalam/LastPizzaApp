@@ -1,0 +1,89 @@
+{% extends "pizzadelivery/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 20px;
+        }
+        .error-container {
+            max-width: 600px;
+            margin: auto;
+            margin-bottom: 15px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .error-icon {
+            font-size: 70px;
+            color: #dc3545;
+            margin-bottom: 15px;
+        }
+        .error-message {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .error-details {
+            background: #ffffff;
+            border: 1px solid #e1e1e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .error-details h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .btn-primary {
+            background-color: #ff5733;
+            border: none;
+            font-size: 1rem;
+            padding: 12px 20px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        .btn-primary:hover {
+            background-color: #e64a19;
+        }
+        .help-instructions {
+            font-size: 0.95rem;
+            color: #555;
+            margin-top: 15px;
+        }
+        .help-link {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #007bff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="error-container">
+    <div class="error-icon">❌</div>
+    <p class="error-message">Oops! Your payment failed.</p>
+    <p class="help-instructions">We couldn't process your payment. Please try again or contact support for assistance.</p>
+    
+    <div class="error-details">
+        <h3>Transaction Details</h3>
+        <ul class="list-unstyled">
+            <li><strong>Transaction ID:</strong> #{{ transaction.id }}</li>
+            <li><strong>Attempted Amount:</strong> ${{ transaction.amount }}</li>
+            <li><strong>Status:</strong> Failed</li>
+        </ul>
+    </div>
+    
+    <a href="{% url 'billing' %}" class="btn btn-primary">Retry Payment</a>
+    <a href="{% url 'contact_support' %}" class="help-link">Contact Support</a>
+</div>
+
+</html>
+{% endblock %}
