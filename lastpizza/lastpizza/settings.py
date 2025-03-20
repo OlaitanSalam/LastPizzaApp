@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os.path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -140,12 +141,12 @@ STRIPE_PUBLISHABLE_KEY = "pk_test_51Qk0c3Cl5NEVXmjV7UXv85EtPjQf3UYVmBGTbB2i6xjfA
 STRIPE_SECRET_KEY = "sk_test_51Qk0c3Cl5NEVXmjVDVVCL0UuRs36RvoWq1sTIOntJmshdBo8aVVNfjTXTcsOIVWbi7nLoshK3paKBNqZ2K3jlM7O00lTBJk6fs"
 
 
+SENDINBLUE_API_KEY = os.getenv("SENDINBLUE_API_KEY")
 
 
-ANYMAIL = {
-    # (exact settings here depend on your ESP...)
-    "SENDINBLUE_API_KEY": "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",
-    
-}
 EMAIL_BACKEND = "anymail.backends.sendinblue.EmailBackend"  # or sendgrid.EmailBackend, or...
 DEFAULT_FROM_EMAIL = "Pizza Support <support@PizzaGarden.com>"  # if you don't already have this in settings
+
+from decouple import config
+
+SENDINBLUE_API_KEY = config("SENDINBLUE_API_KEY")
