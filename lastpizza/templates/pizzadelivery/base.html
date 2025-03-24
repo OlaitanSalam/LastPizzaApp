@@ -8,7 +8,6 @@
     <!-- Title Icon -->
     <link rel="icon" href="{% static 'images/pizza_logo.png' %}" type="image/x-icon">
     <title>Pizza's Garden</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,wght@0,100..900;1,100..900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
@@ -22,10 +21,12 @@
       <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+   
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'cart.js' %}" defer></script>
@@ -172,7 +173,7 @@ body {
 /* Responsive Adjustments */
 @media (max-width: 992px) {
     .navbar-brand span {
-        font-size: 28px; /* Adjust font size for smaller screens */
+        font-size: 35px; /* Adjust font size for smaller screens */
     }
 
     .navbar-brand img {
@@ -184,8 +185,17 @@ body {
         margin: 0 10px; /* Adjust spacing between navbar links on medium screens */
     }
 
+    .navbar-brand {
+        margin-left: 20px; /* Reduce left margin for the brand */
+    }
+
+    .navbar-icons {
+        margin-right: 20px; /* Reduce right margin for the icons */
+        gap: 30px; /* Reduce gap between login/profile and cart icons */
+    }
+
     .icon-hover {
-        font-size: 1.4rem; /* Adjust icon size for smaller screens */
+        font-size: 1.5rem; /* Adjust icon size for smaller screens */
     }
 
     .anim-btn__button {
@@ -193,7 +203,50 @@ body {
         height: 35px; /* Adjust button height for smaller screens */
         font-size: 12px; /* Adjust button font size for smaller screens */
     }
+
+    .cart-badge {
+        font-size: 7px;
+        padding: 1px 2px;
+    }
 }
+@media (max-width: 568px) {
+    .navbar-brand span {
+        font-size: 18px; /* Adjust font size for smaller screens */
+        
+    }
+
+    .navbar-brand img {
+        width: 15px; /* Adjust logo width for smaller screens */
+    }
+
+    .nav-link {
+        font-size: 14px; /* Adjust font size for navbar links on medium screens */
+        margin: 0 5px; /* Adjust spacing between navbar links on medium screens */
+    }
+    .navbar-brand {
+        margin-left: 10px; /* Reduce left margin for the brand */
+    }
+
+    .navbar-icons {
+        margin-right: 10px; /* Reduce right margin for the icons */
+        gap: 20px; /* Reduce gap between login/profile and cart icons */
+    }
+    .cart-badge{
+        font-size: 7px;
+        padding: 1px 2px;
+    }
+
+    .icon-hover {
+        font-size: 1rem; /* Adjust icon size for smaller screens */
+    }
+
+    .anim-btn__button {
+        width: 70px; /* Adjust button width for smaller screens */
+        height: 30px; /* Adjust button height for smaller screens */
+        font-size: 10px; /* Adjust button font size for smaller screens */
+    }
+}
+
 
 /* Footer Styles */
 .footer-distributed {
@@ -486,8 +539,20 @@ body {
         justify-content: center;
         padding: 50px;
     }
-
-    </style>
+  /* Cart Badge Styles */
+  
+    .cart-badge {
+        font-size: 12px;
+        color: #fff;
+        background: red;
+        border-radius: 50%;
+        padding: 3px 6px;
+        position: relative;
+        left: -13px;
+        top: -15px;
+        opacity: 0.8;
+    }
+</style>
 
 </head>
 <body>
@@ -495,11 +560,11 @@ body {
     <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary py-3"> <!-- Adjust vertical padding with py-3 -->
         <div class="container-fluid">
             <!-- Brand Logo -->
-            <a class="navbar-brand" href="#">
+            <div class="navbar-brand">
                 <span>Pizza</span>
                 <img src="{% static 'images/pizza_logo.png' %}" alt="Logo">
                 <span>Garden</span>
-            </a>
+            </div>
 
             <!-- Navbar Links (Visible on Medium and Larger Screens) -->
             <ul class="navbar-nav mx-auto d-none d-lg-flex mb-2 mb-lg-0">
@@ -534,7 +599,13 @@ body {
                 {% endif %}
 
                 <!-- Cart Icon -->
-                <i class="fas fa-shopping-cart fa-xl icon-hover" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></i>
+                <i class="fas fa-shopping-cart fa-xl icon-hover" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    {% if user.is_authenticated %}
+                    <span class="cart-badge" id="cart-items-count">{{ cart.items.count }}</span>
+                   {% endif %}
+                </i>
+                
+                
             </div>
         </div>
     </nav>

@@ -80,20 +80,43 @@
     margin-bottom: 10px;
   }
 
-  .add-to-cart-button {
-    background-color: black;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
+  
+    .add-to-cart-button {
+        position: relative;
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+        overflow: hidden;
+    }
 
-  .add-to-cart-button:hover {
-    background-color: gray;
-  }
+    .add-to-cart-button .add-to-cart,
+    .add-to-cart-button .added {
+        display: inline-block;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .add-to-cart-button .added {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+    }
+
+    /* Animation when button is clicked */
+    .add-to-cart-button:active .add-to-cart {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    .add-to-cart-button:active .added {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
 
   /*style for my hero section*/
 
@@ -434,12 +457,13 @@
           <h4 style="color: #2E8B57; font-weight: 400; font-family: 'Poppins', sans-serif; text-align: center;">${{ pizza.price }}</h4>
           <div class="button-container">
             {% if user.is_authenticated %}
-              <form id="post-form">
-                {% csrf_token %}
-             <!--<button type="button" class="decrement-btn btn btn-dark" data-id="{{ pizza.id }}">-</button> -->
-                <button type="button" class="add-to-cart-button" data-id="{{ pizza.id }}">Add to Cart</button>
-               <!-- <button type="button" class="increment-btn btn btn-dark" data-id="{{ pizza.id }}">+</button>-->
-              </form>
+            <form id="post-form">
+              {% csrf_token %}
+              <button type="button" class="add-to-cart-button" data-id="{{ pizza.id }}">
+                  <span class="add-to-cart">Add to Cart</span>
+                  <span class="added">Item added</span>
+              </button>
+          </form>
             {% else %}
               <a href="{% url 'login' %}"><button class="add-to-cart-button">Order Now</button></a>
             {% endif %}

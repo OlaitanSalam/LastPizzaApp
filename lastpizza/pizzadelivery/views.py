@@ -14,7 +14,7 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from .forms import CustomUserChangeForm
 from django.core.mail import send_mail
-import datetime
+
 
 
 
@@ -250,6 +250,3 @@ def profile(request):
         form = CustomUserChangeForm(instance=user)
 
     return render(request, "pizzadelivery/profile.html", {"form": form, "orders": orders})
-
-def fancybutton(request):
-    return render(request, 'pizzadelivery/fancybutton.html')

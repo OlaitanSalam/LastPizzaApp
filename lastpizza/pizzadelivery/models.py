@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
+from decimal import Decimal
 
 from .managers import CustomUserManager
 
@@ -60,8 +61,7 @@ class CartItem(models.Model):
         return f"{self.quantity} of {self.pizza.name}"
 
     def total_price(self):
-        # Convert the price to a float before multiplying
-        return self.quantity * float(self.pizza.price)
+        return self.quantity * self.pizza.price
 
 
 class Order(models.Model):

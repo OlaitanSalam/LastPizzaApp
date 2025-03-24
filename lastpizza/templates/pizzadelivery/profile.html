@@ -28,15 +28,22 @@
             overflow-y: auto;
         }
 
-        .btn-primary {
-            background-color: #007bff;
+        .primary {
+            background-color: #ff5733;
             border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        .btn-primary:hover {
-            background-color: #0056b3;
+        .primary:hover {
+            background-color: #e64a19;
         }
-      
+      .cart-badge{
+        display: none;
+      }
 
 
 
@@ -88,7 +95,7 @@
                         <label for="country" class="form-label">Country</label>
                         {{ form.country|add_class:"form-control form-control-lg" }}
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg w-100">Save Changes</button>
+                    <button type="submit" class="primary btn-lg w-100">Save Changes</button>
                 </form>
             </div>
         </div>

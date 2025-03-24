@@ -142,9 +142,11 @@ STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
 SENDINBLUE_API_KEY = os.getenv("SENDINBLUE_API_KEY")
 
-
-EMAIL_BACKEND = "anymail.backends.sendinblue.EmailBackend"  # or sendgrid.EmailBackend, or...
-DEFAULT_FROM_EMAIL = "Pizza Support <support@PizzaGarden.com>"  # if you don't already have this in settings
+ANYMAIL = {
+    "SENDINBLUE_API_KEY": config("SENDINBLUE_API_KEY"),  
+}
+EMAIL_BACKEND = "anymail.backends.sendinblue.EmailBackend"  
+DEFAULT_FROM_EMAIL = "Pizza Support <support@PizzaGarden.com>"  
 
 
 

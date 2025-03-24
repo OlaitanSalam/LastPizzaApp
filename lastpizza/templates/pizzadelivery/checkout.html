@@ -3,10 +3,6 @@
 {% load widget_tweaks %}
 {% block content %}
     <style>
-    
-
-
-    
         .form-control {
             background-color: #f8fbff;
             border: 1px solid #ced4da;
@@ -30,20 +26,32 @@
             height: 60px;
         }
 
-        .btn-primary {
+        .custom-primary-button {
             background-color: #ff5f1f;
             border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        .btn-primary:hover {
+        .custom-primary-button:hover {
             background-color: #fd4a04;
         }
+
         .locate-btn {
-            background-color:green;
+            background-color: green;
             border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
         }
-        .locate-btn:hover{
-            background-color:darkgreen;
+
+        .locate-btn:hover {
+            background-color: darkgreen;
         }
 
         .cart-summary {
@@ -63,7 +71,6 @@
                 flex-direction: column;
             }
         }
-        
     </style>
 
 <body>
@@ -71,43 +78,41 @@
 <div class="container-fluid mt-5 px-5 mb-4">
     <div class="row checkout-container d-flex">
         <!-- Cart Summary -->
-<div class="col-md-6 mb-4">
-  <h4>Order Summary</h4>
-  <div class="card cart-summary">
-      <div class="table-responsive">
-          <table class="table">
-              <thead>
-                  <tr>
-                      <th scope="col">Product</th>
-                      <th scope="col">Quantity</th>
-                      <th scope="col" class="text-end">Price</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  {% for item in cart.items.all %}
-                  <tr>
-                      <td class="d-flex align-items-center">
-                          <img src="{{ item.pizza.image.url }}" alt="{{ item.pizza.name }}" class="cart-item-img me-3">
-                          <span>{{ item.pizza.name }}</span>
-                      </td>
-                      <td>{{ item.quantity }}</td>
-                      <td class="text-end">${{ item.total_price }}</td>
-                  </tr>
-                  {% endfor %}
-              </tbody>
-          </table>
-      </div>
-      <div class="card-body d-flex justify-content-between align-items-center">
-          <h5 class="m-0">Total: ${{ cart.total_price }}</h5>
-          <!-- This link will open the offcanvas with cart items -->
-          <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
-            Back to Cart
-          </button>
-
-
-      </div>
-  </div>
-</div>
+        <div class="col-md-6 mb-4">
+            <h4>Order Summary</h4>
+            <div class="card cart-summary">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col" class="text-end">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart.items.all %}
+                            <tr>
+                                <td class="d-flex align-items-center">
+                                    <img src="{{ item.pizza.image.url }}" alt="{{ item.pizza.name }}" class="cart-item-img me-3">
+                                    <span>{{ item.pizza.name }}</span>
+                                </td>
+                                <td>{{ item.quantity }}</td>
+                                <td class="text-end">${{ item.total_price }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <h5 class="m-0">Total: ${{ cart.total_price }}</h5>
+                    <!-- This link will open the offcanvas with cart items -->
+                    <button class="custom-primary-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+                        Back to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <!-- Checkout Form -->
         <div class="col-md-6">
@@ -133,7 +138,6 @@
                 </div>
                 <div class="mb-3">
                     <label for="address" class="form-label">{{ form.address.label }}</label>
-                    
                     <input type="text" id="address" name="address" class="form-control address-field" placeholder="Enter your address" required>
                 </div>
                 <div class="mb-3">
@@ -142,9 +146,8 @@
                         <option value="Nigeria">Nigeria</option>
                     </select>
                 </div>
-                
-                <button type="button" id="locate-btn" class="btn btn-primary locate-btn mb-3">Use Current Location</button>
-                <button type="submit" class="btn btn-primary btn-lg w-100">Proceed to Billing</button>
+                <button type="button" id="locate-btn" class="locate-btn mb-3">Use Current Location</button>
+                <button type="submit" class="custom-primary-button btn-lg w-100">Proceed to Billing</button>
             </form>
         </div>
     </div>
@@ -191,9 +194,5 @@
         alert('Geolocation is not supported by your browser.');
     }
 });
-
 </script>
-
-
-
 {% endblock %}
