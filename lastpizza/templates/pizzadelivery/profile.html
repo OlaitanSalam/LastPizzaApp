@@ -3,66 +3,71 @@
 {% load widget_tweaks %}
 {% block content %}
 
-    <style>
-        .form-control {
-            background-color: #f8fbff;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            padding: 15px;
-            font-size: 1rem;
-        }
+<style>
+    .form-control {
+        background-color: #f8fbff;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        padding: 15px;
+        font-size: 1rem;
+    }
 
-        .form-control:focus {
-            background-color: #f0f8ff;
-            border-color: #80bdff;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        }
+    .form-control:focus {
+        background-color: #f0f8ff;
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
 
-        .form-label {
-            font-weight: bold;
-            color: #495057;
-        }
+    .form-label {
+        font-weight: bold;
+        color: #495057;
+    }
 
-        .table-responsive {
-            max-height: 400px;
-            overflow-y: auto;
-        }
+    .table-responsive {
+        max-height: 400px;
+        overflow-y: auto;
+    }
 
-        .primary {
-            background-color: #ff5733;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    .primary {
+        background-color: #ff5733;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-        .primary:hover {
-            background-color: #e64a19;
-        }
-      .cart-badge{
+    .primary:hover {
+        background-color: #e64a19;
+    }
+
+    .cart-badge {
         display: none;
-      }
+    }
 
-
-
-        /* Responsive Layout */
-        @media (max-width: 768px) {
-            .profile-container {
-                flex-direction: column;
-            }
-            .order-history {
-                margin-top: 20px;
-            }
+    /* Responsive Layout */
+    @media (max-width: 768px) {
+        .profile-container {
+            flex-direction: column;
         }
-
-        .hidden {
-            display: none;
+        .order-history {
+            margin-top: 20px;
         }
-    </style>
+    }
 
-    
+    .hidden {
+        display: none;
+    }
+
+    /* Custom styles for the quantity list */
+    .quantity-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+</style>
+
 <div class="container mt-5 d-flex flex-column min-vh-100">
     <div class="row profile-container flex-grow-1">
         <!-- User Profile Section -->
@@ -117,7 +122,7 @@
                         </thead>
                         <tbody id="order-history-body">
                             {% for order in orders %}
-                                <tr class="{% if forloop.counter > 5 %}hidden{% endif %}">
+                                <tr>
                                     <td>
                                         <ol type="1">
                                             {% for item in order.items.all %}
@@ -125,35 +130,32 @@
                                             {% endfor %}
                                         </ol>
                                     </td>
-                                    <td> {% for item in order.items.all %}
-                                        (x{{ item.quantity }})
-                                    {% endfor %}</td>
+                                    <td>
+                                        <ul class="quantity-list">
+                                            {% for item in order.items.all %}
+                                                <li>(x{{ item.quantity }})</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </td>
                                     <td>{{ order.created_at|date:"M d, Y" }}</td>
                                     <td>{{ order.created_at|time:"H:i A" }}</td>
                                     <td>${{ order.total_price }}</td>
                                 </tr>
                             {% empty %}
                                 <tr>
-                                    <td colspan="4" class="text-center">No order history available.</td>
+                                    <td colspan="5" class="text-center">No order history available.</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
-
-
-           
+            </div>
+            <!-- Logout Button at Right Bottom -->
+            <div class="text-end mt-3 w-100">
+                <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+            </div>
         </div>
-         <!-- Logout Button at Right Bottom -->
-         <div class="text-end mt-3 w-100">
-
-            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
-        </div>
-        </div>
-        
     </div>
 </div>
 
 {% endblock %}
-
-    

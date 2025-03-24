@@ -1,7 +1,33 @@
-{% extends "pizzadelivery/base.html" %}
-{% block content %}
-{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+   
 {% load widget_tweaks %}
+    <meta name="description" content="Pizza Delivery, Pizza Online Order">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Title Icon -->
+    <link rel="icon" href="{% static 'images/pizza_logo.png' %}" type="image/x-icon">
+    <title>Pizza's Garden</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,wght@0,100..900;1,100..900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+      <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+       <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    
+    <!-- Font Awesome Icons -->
+    
+    
+        
+    <!-- Custom CSS -->
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <!--stripe link-->
+    <script src="https://js.stripe.com/v3/"></script>
+   
+
 
 <style>
     body {
@@ -100,6 +126,7 @@
         max-width: 300px;
     }
 </style>
+</head>
 
 <body>
     <div class="checkout-container">
@@ -240,4 +267,4 @@
     </script>
 </body>
 
-{% endblock %}
+</html>

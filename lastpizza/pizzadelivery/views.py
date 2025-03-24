@@ -238,7 +238,7 @@ def order_failed(request):
 @login_required
 def profile(request):
     user = request.user
-    orders = Order.objects.filter(user=user).order_by("-created_at")  # Fetch user orders
+    orders = Order.objects.filter(user=user, is_paid=True).order_by("-created_at")  # Fetch user orders
 
     if request.method == "POST":
         form = CustomUserChangeForm(request.POST, instance=user)

@@ -63,6 +63,9 @@
             color: #007bff;
             text-decoration: underline;
         }
+        .cart-badge{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -81,7 +84,7 @@
         </ul>
     </div>
     
-    <a href="{% url 'billing' %}" class="btn btn-primary">Retry Payment</a>
+    <a href="{% url 'billing' %}" class="btn-primary">Retry Payment</a>
     <a href="{% url 'contact_support' %}" class="help-link">Contact Support</a>
 </div>
 
