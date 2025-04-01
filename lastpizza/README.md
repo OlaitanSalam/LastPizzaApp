@@ -23,7 +23,7 @@ Pizza_Delivery_WebApp is a Django-based web application for ordering pizzas onli
 1. **Clone the repository:**
 
     ```sh
-    git clone https://https://github.com/OlaitanSalam/LastPizzaApp.git
+    git clone https://https://github.com/OlaitanSalam/PizzaDeliveryApp.git
     cd LastPizzaApp
     ```
 
